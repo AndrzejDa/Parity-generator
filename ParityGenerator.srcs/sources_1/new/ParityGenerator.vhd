@@ -39,11 +39,10 @@ end ParityGenerator;
 
 architecture Behavioral of ParityGenerator is
 
-    signal led7_even : std_logic_vector(7 downto 0) := "01100000";  --E na wyswietlaczu 7 seg
-    signal led7_odd : std_logic_vector(7 downto 0) := "00000010";   --O na wyswietlaczu 7 seg
+    signal led7_even : std_logic_vector(7 downto 0) := "01100001";  --E na wyswietlaczu 7 seg
+    signal led7_odd : std_logic_vector(7 downto 0) := "00000011";   --O na wyswietlaczu 7 seg
 
 begin
-        
     process(sw_i)
         variable num_bits : integer range 0 to sw_i'length;
         begin
