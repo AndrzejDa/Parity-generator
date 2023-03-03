@@ -33,13 +33,31 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity ParityGenerator is
   Port (sw_i : in std_logic_vector(7 downto 0);
-        led7_an_i : in std_logic_vector(3 downto 0);
-        led7_seg_o : out std_logic_vector(7 downto 0));
+        led7_an_o : out std_logic_vector(3 downto 0);
+        led7_seg_o : out std_logic_vector(7 downto 0));     --7=A 6=B ... 1=G 0=DP
 end ParityGenerator;
 
 architecture Behavioral of ParityGenerator is
 
+    signal led7_even : std_logic_vector(7 downto 0) := "01100000";  --E na wyswietlaczu 7 seg
+    signal led7_odd : std_logic_vector(7 downto 0) := "00000010";   --O na wyswietlaczu 7 seg
+
 begin
-
-
+        
+    process(sw_i)
+        variable num_bits : integer range 0 to sw_i'length;
+        begin
+        led7_an_o <= "1111";    --wylaczenie wszystkich z 4 dostepnych segmentow
+        num_bits := 0;
+        for i in sw_i'range loop
+            if sw_i(i) = '1' then
+                num_bits := num_bits + 1;
+            end if;
+        end loop;
+        
+        if num_bits mod 2 = 0 then led7_seg_o <= led7_even;
+        else led7_seg_o <= led7_odd;
+        end if;
+        led7_an_o(0) <= '0';    --wlaczenie 1 z 4 segmentow
+    end process;
 end Behavioral;
