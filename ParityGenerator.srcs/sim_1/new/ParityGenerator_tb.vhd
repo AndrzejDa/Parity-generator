@@ -49,7 +49,7 @@ architecture Behavioral of ParityGenerator_tb is
     signal led7_an_o : std_logic_vector(3 downto 0);
     signal led7_seg_o : std_logic_vector(7 downto 0);
     
-    constant delay : time := 10 ns;
+    constant delay : time := 100 ms;
     
 begin
     --instance the uut
@@ -65,18 +65,30 @@ begin
         sw_i <= "00000000";
         wait for delay;
         
-        sw_i <= "01010101";
+        sw_i <= "00000001";
         wait for delay;
         
-        sw_i <= "00010011";
+        sw_i <= "00000011";
         wait for delay;
         
-        sw_i <= "11000111";
+        sw_i <= "00000111";
         wait for delay;
         
-        sw_i <= "11101111";
+        sw_i <= "00001111";
         wait for delay;
-        wait for 50 ns;
+        
+        sw_i <= "00011111";
+        wait for delay;
+        
+        sw_i <= "00111111";
+        wait for delay;
+        
+        sw_i <= "01111111";
+        wait for delay;
+        
+        sw_i <= "11111111";
+        wait for delay;
+
 
         
     end process;
